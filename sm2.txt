@@ -1,0 +1,10 @@
+用户密码加密方法
+
+import sm2Encrypt from "./sm2";
+let password = sm2Encrypt(
+    this.resetForm.password +
+        "[#]" +
+        this.passwordEncryptionData.time,
+    this.passwordEncryptionData.publicKey,
+    0
+);

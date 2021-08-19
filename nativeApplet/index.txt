@@ -1,0 +1,13 @@
+app.json
+    {
+        "pages":[],//主页面
+        "subpackages": [//分包
+            {
+                "root": "",
+                "pages": [],
+            }
+        ],
+        "tabBar": {//底部导航
+            "list": [],
+        }
+    }

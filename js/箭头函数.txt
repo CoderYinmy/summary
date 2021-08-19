@@ -1,0 +1,10 @@
+箭头函数
+1、箭头函数基本语法
+    let a = (a, b) => {}
+    let b = (res) => return 1*5
+2、与普通函数的区别
+    箭头函数本身没有prototype，所以没有自己的this
+    没有自己的arguments对象
+    不能作为构造函数使用
+    箭头函数不能用作Generator，不能用yield关键字
+

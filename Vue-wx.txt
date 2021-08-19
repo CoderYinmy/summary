@@ -1,0 +1,24 @@
+VUE——wx获取code
+
+	通过连接调起授权后重定向至页面
+		window.location.href =
+                'https://open.weixin.qq.com/connect/oauth2/authorize?		
+				appid=wx1045da30fd6a1458 小程序appid
+				&redirect_uri=http://test.lichaowenchuang.com 重定向至当前页面
+				&response_type=code
+				&scope=snsapi_userinfo //用户手动授权
+				&state=' + '/sharePage' +
+                	'#wechat_redirect'
+	获取返回code
+		Vue ——  this.$route.query.code
+		Js ——
+			function getQueryString(name) {
+    				var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+    				var r = window.location.search.substr(1).match(reg)
+    				if (r != null) return unescape(r[2])
+    				return null
+			}
+			let code = getQueryString('code')
+	
+	vue页面跳转至微信小程序
+		window.location.href = "weixin://dl/business/?t=SWQvuxbkz3v"（根据页面路径生成一个长连接）

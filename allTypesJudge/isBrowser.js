@@ -1,0 +1,14 @@
+//浏览器对象
+exports.isBrowser = function isBrowser(v) {
+    if (
+        typeof navigator !== 'undefined' &&
+        (navigator.product === 'ReactNative' ||
+            navigator.product === 'NativeScript' ||
+            navigator.product === 'NS'
+        )
+    ) {
+        return false;
+    }
+
+    return typeof window !== 'undefined' && typeof document !== 'undefined';
+}

@@ -1,0 +1,50 @@
+VUE3.0——Proxy 解决get、post跨域
+	在vue.config.js中写入
+	devServer: {
+        proxy: {
+            '/api': {
+                target: process.env.VUE_APP_URL,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '/api',
+                },
+                cssSourceMap: false,
+                onProxyReq: function(proxyReq, req, res) {
+                    if (proxyReq.getHeader('origin')) {
+                        proxyReq.setHeader('origin', process.env.VUE_APP_URL)
+                    }
+
+                    // console.log(
+                    //     '原路径：' + req.originalUrl,
+                    //     '代理路径：' + req.path
+                    // )
+                },
+            },
+        },
+        disableHostCheck: true,//解决——Vue 频繁转换请求路径导致热更失败报错
+    },
+	
+	遇到问题
+		1、只写入target、changeOrigin、pathRewrite只能满足get请求，post请求报404/403
+			proxy: {
+            	 '/api': {
+                	target: process.env.VUE_APP_URL,
+                	changeOrigin: true,
+                 	pathRewrite: {
+                    '^/api': '/api',
+                	},
+			   }
+			}
+		2、满足post请求可以在proxy中加入
+			cssSourceMap: false,
+                onProxyReq: function(proxyReq, req, res) {
+                    if (proxyReq.getHeader('origin')) {
+                        proxyReq.setHeader('origin', process.env.VUE_APP_URL)
+                    }
+
+                    // console.log(
+                    //     '原路径：' + req.originalUrl,
+                    //     '代理路径：' + req.path
+                    // )
+                },
+			

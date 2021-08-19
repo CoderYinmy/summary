@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            html,body{
+                height: 100%;
+            }
+            .pages__wrap {
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+                align-items: center;
+            }
+            .header {
+                width: 100%;
+                height: 100px;
+                flex-shrink: 0;
+                background-color: #f90;
+            }
+            .content {
+                width: 200px;
+                flex-grow: 1;
+            }
+            .item{
+                width: 100%;
+                height: 1200px;
+                background-color: burlywood;
+            }
+            .footer {
+                width: 100%;
+                height: 100px;
+                flex-shrink: 0;
+                background-color: cadetblue;
+            }
+            /*flex-grow:0  控制容器和剩余空间*/
+            /*flex-shrink:1/0不收缩 控制当子元素尺寸之和超出容器之后收缩元素 解决头尾消失问题*/
+        </style>
+    </head>
+    <body>
+        <div class="pages__wrap">
+            <div class="header"></div>
+            <div class="content">
+                <div class="item"></div>
+            </div>
+            <div class="footer"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,9 @@
+1、块级格式化上下文，一个独立的块级渲染区域，有独有的渲染规则约束块级盒子布局，且与区域外部无关。
+2、如何触发BFC
+    float值不是none
+    position值是absolute
+    display值是inline-block、flex、inline-flex
+    overflow:hidden
+3、作用
+    取消盒子margin塌陷
+    阻止元素被浮动元素覆盖
