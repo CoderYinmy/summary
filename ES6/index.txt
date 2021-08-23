@@ -1,0 +1,39 @@
+一、字符串扩展
+    1.Unicode表示法  
+        采用\uxxxx xxxx表示码点 只限于\u0000 - \uffff
+        超出范围字符用双字节表示
+        ES6改进了方法 1.码点放入{}内 \u{00000} == UTF-16编码
+    2.字符串遍历器接口（Iterator）
+        for...of循环遍历
+        可以识别超出范围的码点  String.fromCodePoint(0x20BB) 
+    3.u+2018（行字符间隔） 和 u+2029（段字符间隔）
+    4.JSON.Stringify()改造
+    5.模板字符串
+    6.模板字符串限制
+二、新增字符串方法
+    1.String.fromCodePoint()
+        ES5：fromCharCode() 返回Unicode码点的对应字符串，但不能识别码点大于规定范围（0xFFFF）的字符
+        ES6：fromCodePoint() 弥补es5不足
+    2.String.raw()
+        为原生String对象提供了raw()方法
+        将变量进行转义
+        主要用于模板字符串处理方法
+    3.codePointAt()
+        js内部 字符以UTF-16格式存储，每个字符固定为2个字符，4个字符的js会认为是2个字节
+        charAt() 可以处理2个字节
+        ES6：codePointAt() 可以处理4个字节存储的字符，返回十进制码点 == charCodeAt
+    4.normalize()
+        将字符的不同表示方法统一为同样形式，Unicode正规化
+    5.indexOf 确定一个字符串是否在另一个字符串里 
+        includes(),startWith,endWidth() 第一个参数：要查找的字符串  第二个参数：开始位置
+    6.String.repeat()  重复字符串指定次数
+    7.padStart、padEnd  字符串长度补全
+    8.trimStart(trimLeft)、trimEnd（trimRight) 取消字符串空格
+    9.matchAll()  返回正则在字符串中所有匹配字符
+    10.replace()   字符串替换
+        第一个参数：搜索查找字符(可以是字符串/正则)
+        第二个参数：替换字符  / 也可以是函数
+
+三、正则扩展
+    1.RegExp构造函数
+        
