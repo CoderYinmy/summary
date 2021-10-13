@@ -1,0 +1,9 @@
+1、吸顶u-sticky和下拉选框u-dropdown配合使用吸顶时会遮挡下面的部分
+uview 源码中修改
+定义 contentHeightCalc:0 变量
+在menuClick方法中加入  this.contentHeight = this.contentHeightCalc //解决置顶的时候因为Z-index挡住下面的内容
+在close方法中加入  this.contentHeight = 0;
+在getContentHeight方法中  this.contentHeightCalc = windowHeight - res.bottom;
+
+2、出现高度塌陷问题
+    未解决

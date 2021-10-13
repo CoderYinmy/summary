@@ -1,0 +1,25 @@
+/* 关闭按钮 */
+.cancleBtn {
+  display: inline-block;
+  padding: 0px 4px 8px;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+#close {
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: #ccc;
+  transform: rotate(45deg);
+}
+
+#close::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: #ccc;
+  transform: rotate(-90deg);
+}
