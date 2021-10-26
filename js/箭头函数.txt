@@ -3,6 +3,7 @@
     let a = (a, b) => {}
     let b = (res) => return 1*5
 2、与普通函数的区别
+    this永远指向声明它的函数，普通函数this指向调用它的函数
     箭头函数本身没有prototype，所以没有自己的this
     没有自己的arguments对象
     不能作为构造函数使用
