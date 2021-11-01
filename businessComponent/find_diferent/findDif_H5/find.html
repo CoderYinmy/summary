@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .wrapper {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper" id="wrapper"></div>
+
+    <script>
+      let rects = [
+        {
+          x: 0,
+          y: 0,
+          width: 50,
+          height: 50,
+        },
+        {
+          x: 100,
+          y: 100,
+          width: 50,
+          height: 50,
+        },
+      ];
+      let image = {
+        width: 300,
+        height: 300,
+        src: "./1.png",
+      };
+
+      function createWrapper(wrapper, image) {
+        let div = document.createElement("div");
+        div.style.position = "relative";
+        div.style.width = image.width + "px";
+        div.style.height = image.height + "px";
+
+        var img = document.createElement("img");
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.src = image.src;
+
+        div.appendChild(img);
+
+        wrapper.appendChild(div);
+
+        return div;
+      }
+
+      var wrapper = document.getElementById("wrapper");
+      var wrap1 = createWrapper(wrapper, image);
+      var wrap2 = createWrapper(wrapper, image);
+
+      function checkPointInRects(point, rects) {
+        const rect = rects.find((v) => {
+          return (
+            v.x <= point.left &&
+            point.left <= v.x + v.width &&
+            v.y <= point.top &&
+            point.top <= v.y + v.height
+          );
+        });
+
+        return rect;
+      }
+
+      function createDiffMask(wrapper, rect) {
+        const div = document.createElement("div");
+        div.style.position = "absolute";
+        div.style.left = rect.x + "px";
+        div.style.top = rect.y + "px";
+        div.style.width = rect.width + "px";
+        div.style.height = rect.height + "px";
+        div.style.border = "1px solid red";
+        div.style.zIndex = "999";
+
+        wrapper.appendChild(div);
+      }
+
+      //   function creadDifsMask(wrapper1, wrapper2, diffs) {
+      //     function creatDiv(div, reat) {
+      //       div.className = "diff";
+      //       div.style.left = reat.x;
+      //       div.style.top = reat.y;
+      //       div.style.width = reat.width;
+      //       div.style.height = reat.height;
+      //       return div;
+      //     }
+
+      //     diffs.forEach((v) => {
+      //       var diff1 = document.createElement("div");
+      //       var diff2 = document.createElement("div");
+      //       wrapper1.appendChild(diff1);
+      //       wrapper2.appendChild(diff2);
+      //       creatDiv(diff1, v);
+      //       creatDiv(diff2, v);
+      //       v.diff1 = diff1;
+      //       v.diff2 = diff2;
+      //     });
+      //     debugger;
+      //   }
+      //   creadDifsMask(wrap1, wrap2, rects);
+
+      function offset(el) {
+        var top = el.offsetTop;
+        var left = el.offsetLeft;
+
+        while (el.offsetParent) {
+          el = el.offsetParent;
+          if (window.navigator.userAgent.indexOf("MSTE 8") > -1) {
+            top += el.offsetTop;
+            left += el.offsetLeft;
+          } else {
+            top += el.offsetTop + el.clientTop;
+            left += el.offsetLeft + el.clientLeft;
+          }
+        }
+
+        return {
+          left: left,
+          top: top,
+        };
+      }
+
+      function clickHandler(e) {
+        var currentTarget = e.currentTarget;
+        var currentTargetOffset = offset(currentTarget);
+        var target = e.target;
+        var targetOffset = offset(target);
+        var realOffset = {
+          left: targetOffset.left - currentTargetOffset.left,
+          top: targetOffset.top - currentTargetOffset.top,
+        };
+        var relativeOffset = {
+          left: realOffset.left + e.offsetX,
+          top: realOffset.top + e.offsetY,
+        };
+        debugger;
+
+        var rect = checkPointInRects(relativeOffset, rects);
+        if (rect) {
+          createDiffMask(wrap1, rect);
+          createDiffMask(wrap2, rect);
+        }
+      }
+
+      wrap1.onclick = clickHandler;
+      wrap2.onclick = clickHandler;
+    </script>
+  </body>
+</html>

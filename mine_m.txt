@@ -1,0 +1,421 @@
+Git
+ 1、进行错误提交，没有push到远程分支，想要撤回本次提交
+git  reset —hard 彻底回退到某个版本，本地源码也会变成上一个版本，撤销的commit中所包含的更改会被冲掉
+git reset —soft 回退到某个版本，只回退了commit信息，不会恢复到 index file 一级，想要再次
+提交则直接commit
+
+2、Git log  查看本地的所有提交（查看操作记录）
+
+3、git如何暂存
+
+	Git stash 存储当前分支修改
+	git stash list 查看所有暂存记录
+ 恢复暂存：
+	1、Git stash apply 恢复暂存，但恢复后stash内容并不会删除，在执行git stash list 需要 执行git stash drop来删除
+	2、git stash pop恢复的同时会把stash 存储列表的内容也删除
+
+
+CSS
+1、CSS盒模型与box-sizing
+	标准盒模型：content
+	IE盒模型：border + padding + content
+	box-sizing：
+		border-box  元素宽高包括——元素宽高+内边距+border
+		content-box 元素宽高不包括——内边距和border
+		inherit  从父元素继承box-sizing属性值
+2、选择器种类及优先级
+	
+选择器种类——
+	样式类型 ：行内、内联、外部
+	选择器类型：id、class、属性、标签、*、伪类、伪元素、后代、子类、兄弟
+
+优先级——
+!important 正无穷
+内联 1000
+id 100
+Class、伪类、属性选择器  10
+标签、伪元素  1
+通配符、子类选择器、兄弟选择器 0
+3、伪类和伪元素
+	伪元素——创建一个新的元素达到想要的效果，用双冒号表示 ::befor ::after
+	伪类——添加一个类不创建新元素 ,用单冒号显示 :first-child
+
+4、position有哪几种属性，分别表示什么
+	absolute  绝对定位——相对于第一个父元素进行定位
+	relative  相对定位——相对于正常位置进行定位
+	fixed     绝对定位——相对于浏览器窗口进行定位
+	static    默认值——元素出现在正常流中
+	sticky	  粘连性元素——相对于它最近的滚动元素进行定位
+	
+5、左侧定宽、右侧自适应布局
+	/* diaplay:flex */
+	/* display: inline-block + calc()*/
+	/* float + calc() */
+	/* float: left; + padding-left */
+	/* left absolute */
+	/* left right absolute */
+
+6、品字形布局如何实现
+	display: flex; justify-content:center
+
+7、CSS为什么要样式初始化，比如reset.css或者normalize.cs
+	每个浏览器样式 不尽相同，所以我们第一件事就是样式统一，
+	使得开发网页更加方便简洁，同时减少代码量，节约下载时间
+
+8、display:none与visibility:hidden的区别是什么
+	display:none 隐藏后不会占据空间
+	visibility: hidden; 隐藏后仍然会占据空间
+
+9、移动端样式适配
+	meta 标签的viewport来设置视口、缩放等
+	rem布局  rem是相对于html节点font-size来计算的  
+			将1rem设置为视口宽度的1/10，1rem = 1/10
+			将UI转成rem
+			比如：iphone6 375px，1rem  = 37.5rem
+					元素宽为75px  75/37.5 = 2rem
+			因计算繁琐我们一般会下载px2rem插件来帮助实现
+	VM和VH  将屏幕宽高分为100份 1vm = 1% 375px 1vm = 3.75vm
+
+
+10、媒体查询
+	查询屏幕尺寸，应用不同样式
+	应用在link、@import 引入样式时使用
+	实现图片自适应
+	可以通过window.MatchMedia进行媒体查询
+11、flex布局，flex为auto和none表示什么
+	表示可扩大和可缩小
+	flex:1 无论内容多少平均分配空间
+	flex：auto 根据内容多少来分
+	flex: 0和flex：none 不可扩大不可缩小
+	flex：0 最小内容宽度
+	flex：none 内容本身宽度
+
+12、CSS画0.5px的边框
+	transform: scale(0.5);
+	.box2 {
+            position: relative;
+            margin: 10px 0 0 200px;
+            border: none;
+            background: none;
+            height: 100px;
+            width: 100px;
+        }
+
+        .box2::after {
+            content: '';
+            position: absolute;
+            border: 1px solid #000;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            width: 200%;
+            height: 200%;
+            transform: scale(0.5);
+            transform-origin: left top;
+        }
+
+13、CSS画三角形
+
+14、CSS画正方形或者图片按照16:9显示
+	9/16*100%
+15、CSS浮动、清除浮动的方法
+	浮动一般是使用float后  元素脱离文档流，造成高度塌陷  
+	.clearfix:before,
+	.clearfix:after {
+    		display: table;
+    		content: " ";
+	}
+	.clearfix:after {
+    		clear: both;
+	}
+	.clearfix{
+    		*zoom: 1;
+	}
+
+	父元素设置  overflow:hidden
+16、BFC布局***
+	什么是BFC：BFC又叫块级格式化上下文，我们可以理解为它是一个独立的渲染区域，并且不受外界干扰
+	如何触发BFC：
+		根元素
+		float不为none
+		overflow不为visible
+		display值为 table-cell inline-block table-caption
+		position 值为 absolute fixed
+	规则：
+		BFC内块元素会垂直排列
+		两个相邻的元素之间会出现margin重叠
+		计算BFC区域时，浮动元素也参与计算
+	应用： 
+		1、防止margin 重叠
+			方法： 可以在元素外包裹一层容器生成一个新的BFC并去触发、给元素加display：inline-block、嵌套元素margin重叠给父元素一个display：inline-block
+		2、清浮动
+		3、自适应多栏布局
+
+17、animation与transition的区别
+	transition 需要事件触发，且是一次性的，不能重复发生，只能定义开始和结束状态不能定义中间状态，不能涉及多个属性
+	animation 弥补了以上不足
+
+18、动画时间间隔必须达到多少***
+	浏览器刷新频率每秒刷新60次，所以间隔 1/60*1000,  16.7ms
+
+19、CSS雪碧图如何实现，有什么优点
+	通过设置background-position来展示图片
+	好处
+		降低服务器压力。
+		减少网络请求，页面渲染更快。
+	缺点
+		后期维护困难，添加一张图片需要重新制作。
+		应用麻烦，每一张图都需要计算位置，通过调整位置来展示图片，对误差的要求很严格。
+		使用图片有局限，只能用在背景图片background-image上，不能用<img>标签来使用
+
+
+20、如何实现多行文本截断***
+	获取text length
+	获取 浏览器宽度
+	获取字号大小
+	计算一行容纳多少字
+	计算规定行容纳字数
+	规定行容纳字数 < text.length
+	text.slice(0, lastIndex - 3).concat('...')
+	
+
+	(多用于移动端 支持webkit内核浏览器
+      display: -webkit-box;设置为伸缩盒子
+      -webkit-box-orient: vertical;设置子元素排列方式
+      -webkit-line-clamp: 2;设置显示文本行数)
+
+DOM
+1、li与li之间的空白如何产生?
+	浏览器会默认把行元素间的空白字符渲染成空格
+	还有就是换行后会把产生的换行符变成一个空格，空格就是一个字符
+	解决方法   font-size ：0
+		    给ul 设置 letter-spacing: -5px; li设置 letter-spacing：normal
+
+2、事件冒泡与捕获
+	事件冒泡：由当前元素逐级向上查找的过程
+	事件捕获：由根源向下查找
+3、事件委托的好处，如何区分是哪个子元素
+	利用事件冒泡机制处理指定一个事件处理程序，来管理某一类型的所有事件
+	好处：
+	利用事件冒泡机制，将事件加在父元素上，在内存上只开辟了一块空间，节省资源的同时减少了dom操作、提高性能
+	动态添加元素绑定事件
+	
+	操作的哪个元素哪个就是哪个元素就是事件源 event.target
+4、节流与防抖
+	节流：保证事件在规定时间内只执行一次
+	防抖：规定事件在n秒后执行，n秒内执行事件重新计算
+5、CSS的加载是否会阻塞浏览器渲染
+	会阻塞link后面js的执行
+	浏览器为防止重复渲染降低性能，所以浏览器只会在加载时才会渲染dom树，等css下载完成之后才会进行dom渲染执行js。
+	所以在css没有下载完成之前页面是白屏
+6、script标签的defer和async
+	都用于处理脚本行为
+	defer属性 脚本在执行时不影响页面构造，脚本会延迟到页面执行完毕之后执行，相当于告诉浏览器立即下载但延迟执行，是按照顺序执行
+	async 只能用于处理外部脚本，异步执行
+
+7、DOMContentLoaded与load事件的区别
+	load事件——用于检测一个所有都加载完的页面（html、css、js、图片等资源都已经加载完毕）
+	DOMContentLoaded——当初始的HTML解析和加载完成时就会被触发
+
+HTTP
+1、HTTP缓存，ETAG和IF-Modified-Since
+	浏览器缓存：http缓存、indexDB、cookie、localStorage
+	http缓存：强缓存和协商缓存。
+	浏览器会先根据这个浏览器http的头判断是否命中强缓存，则直接加载缓存中资源、不会发送请求到服务器
+	如果未命中强缓存则会发送一个请求到服务器，服务器来判断本地缓存是否失效，若可以使用服务器不会返回资源信息，浏览器还是继续从缓存中加载
+
+强缓存： 利用http返回的Expires和cache-control来表示资源缓存时间
+	Expires 用来指定资源到期时间、是服务器具体时间点
+	cache-control 是一个相对时间
+	二者同时启用 cache-control 优先级更高
+协商缓存： 浏览器会将请求发送至服务器，根据Last-Modify/if-Modify-since 或者 Etage/if-None-Match来判断是否命中协商缓存，命中则返回304浏览器从缓存中加载资源
+	Last-Modify 标识最后修改时间
+	服务器根据if-Modify-since （缓存之前返回的Last-Modify）判断是否命中缓存
+	
+	Etage/if-None-Matc返回一个校验码，保证每个资源都是唯一的
+	服务器根据if-None-Mat判断是否命中缓存
+2、前端本地存储
+	Cookie、LocalStorage、SessionStorage
+	cookie：以key、value的形式存储
+		cookie很容易被查看建议加密后存储、容易被XSS攻击设置HttpOnly=true不让客户端访问
+		只能存储4kb、只能存字符串、存储数量最多20条、
+	LocalStorage： 永久性存储关闭浏览器也不会销毁、存储一般为5M
+	SessionStorage： 浏览器关闭就会销毁、存储类型均为字符串
+3、cookie的的几个属性  
+	name/value domain域名 maxAge 最大失效时间 Expries最大失效时间 httpOnly阻止客户端访问防止Xss攻击
+	secure 为true时，cookie在http无效 https有效
+
+4、get与post的区别
+	get的请求参数是作为url传递的  post是包含在请求体中的
+	由于浏览器和服务器的限制get请求在URL中传参是有长度限制的
+	post接受多种参数类型
+	get在请求中会有1个tcp数据包，在请求过程中get会把data和header一起
+	post在请求过程中会先发送header，服务器响应100后在发送data，服务器响应200
+	
+5、同源策略
+	如果两个URL的请求地址一致就是同源
+	如果请求不同地址的数据或者访问不同地址文件就涉及到了跨域
+	跨域的解决方法
+		<script>、<img>、<iframe>、<link>
+	1、Jsonp
+	2、CORS  需要浏览器和服务器同时支持
+		分为简单请求和非简单请求
+		简单请求： 请求方法为HEAD、GET、POST其中一个，http请求头信息content-type不是application/Json		满足这两个要求则为简单请求
+	
+		浏览器在发出请求时会增加一个origin字段
+		非简单请求： 会发送一个预检请求，用来询问header信息里的origin请求域名是否在服务器许可名单之中，得到肯定答复后才会发起正式请求
+	3、代理
+
+JS
+
+1、基础类型和引用类型的存储，堆还是栈
+2、js的基础类型及判断
+
+3、字面量字符串为何能直接调用api，如var s = '123'; s.slice(1)
+4、var a = new Number(10); typeof a返回什么，var a = Number(10)呢
+5、闭包总结:
+	闭包就是能够读取其他函数内部变量的函数
+	用途：1. 可以读取函数内部的变量 2. 变量的值始终保持在内存中
+	注意点：1. 导致内存泄露 2. 值篡改
+6、符串反转。
+	splice 分割为数组
+	reverse 反转
+	join	拼接
+
+7、call、apply与bind
+	都可以改变this指向
+	call 依次传入参数，改变this指向并把该函数立即执行
+	apply 直接传数组
+	bind  返回一个函数 需要再次调用
+
+8、js垃圾回收机制，引用计数有什么缺点
+	根据变量引用次数
+	会出现循环引用，a引用了b，b也引用了a，导致这些变量永远不会变成0，函数多次调用，导致大量内存释放不掉
+9、js作用域链
+	作用域：全局作用域和局部作用域
+		全局作用域——var声明的变量可以在任何一个地方访问
+		局部作用域——又称为函数作用域，只能在作用域内使用
+	作用域链：是内部上下文所有变量对象的列表，用于变量查询
+		在js执行时，使用一个变量会一直向上查找，当找不到时就会接着向上查找，这种查找的过程就组成了一个作用域链
+
+10、promise
+	异步回调 ——解决回调地狱
+	promise 有3种状态 peding fulfilled rejected
+	成功的时候 peding转为fulfilled
+	失败的时候 peding转为rejected
+
+	.all 将多个结果合并在一起（将多个promise实例包装成一个新的promise）
+	.race	有任意一个返回成功后就算完成，但进程不会停止
+	.any 返回第一个成功的，进程停止
+11、js this指向，箭头函数有什么区别
+	this一般指向调用它的函数，箭头函数this指向定义它的函数
+	箭头函数没有arguments
+	箭头函数不能用做构造函数使用
+	箭头函数本身没有prototype，所以没有自己的this
+	箭头函数不能用作Generator，不能使用yield关键字
+12、如何判断js数组
+	　用arr.length判断数组是否为空
+	 用Object.prototype.toString.call()判断数组类型
+13、js如何清空数组
+	给数组重新赋值 一个空数组
+	将数组length = 0
+	用slice(0, arr.length)
+14、字符串如何转数字
+	+string
+	string - 0
+	string*1
+	Number() 强制转换
+	tofixed() 保留n位小数
+	Math.ceil() 向上取整
+	Math.floor() 向下取整
+15、函数声明与函数表达式的区别
+	函数声明创建的函数在函数解析后就可以调用
+	函数表达式创建的函数在函数运行时才被赋值只能等赋值后在调用
+16、new一个构造函数的过程是什么，如果返回return一个对象得到的是什么
+	1. 创建一个新对象
+	2.将创建的隐式原型连接到构造函数的显示原型上
+	3.将this指向新创建的对象
+	4.判断是否返回对象，没有返回则返回this
+17、==和===区别？ 
+	== 转换类型后比较   === 类型的比较
+18、js的event loop
+	事件轮询的出现是为了解决js单线程对于异步操作的一种机制
+	执行过程中同步代码立即执行，异步代码放入任务队列中，
+
+
+19、作用域链是静态的还是动态的，有什么方法可以改变作用域链？ 
+	静态的、with方法
+20、js继承和原型链
+	继承现实中的继承是子承父业，而计算机中的继承是子类可以继承父类的方法和属性，重新定义、追加属性和方法
+	继承实现的方法
+		原型链继承
+			child.prototype = new Father()
+			child.prototype.construcor = child
+			重写prototype，child.prototype没有construcor  我们需要将constructor重新指向构造函数
+		借用构造函数继承
+		组合式继承
+		原生式继承
+		寄生式继承
+		寄生式组合继承
+	
+21、Promise与async、await
+22、Symbol有什么用
+	解决属性冲突和模拟私有属性
+	保证对象属性名的唯一性，不能使用new进行操作，不能用JSON.parse 和 JSON.stringify 进行深拷贝，
+23、ES6的ES Module，与CommonJS和AMD
+	模块化开发可以提高代码复用率，方便代码管理。通常一个文件就是一个模块，都有自己的作用域
+	目前流行的js模块化规范有CommonJs 、AMD、CMD、ES6 Module
+
+24、ES最新的方法，比如链判断运算法 
+	a & a.b & a.b.c
+
+VUE
+1、keep-alive的作用
+	keep-alive用来缓存组件,避免多次加载相应的组件,减少性能消耗
+	从页面1跳转到页面2后，然后后退到页面1，只会加载缓存中之前已经渲染好的页面1，而不会再次重新加载页面1
+2、MVC与MVVM的区别
+	MVC （model-controller-view）
+		是一个单向过程，model彻底解耦，控制层和视图没有彻底解偶（点击button获取数据渲染至视图的过程）
+	MVP （model-presenter-view）
+		controller与view彻底解耦，
+		model和view通过presenter进行交流沟通
+		通过引入接口baseView，让相应视图组件activity，Fragment实现baseView，但随着业务的增加，页面会非常复杂，UI改变很多，会造成view接口庞大
+	MVVM （model-view-viewModel）
+		其实就是一个数据双向绑定的过程，model-view把数据显示到视图，viewModel通过addEventListener监听数据变化显示到视图
+3、Vue-router的实现原理
+	
+4、vue双向绑定原理
+5、SPA的优点和缺点
+	单页面应用
+6、v-show与v-if区别
+	v-if 如果条件为真 才开始创建元素和加载子组件，如果为假，元素销毁，会等到判断为真多时候重新开始创建，切换开销大；
+		有配套的v-else
+	v-show 判断里的元素会首先渲染，通过css进行简单切换，初始渲染开销大
+
+7、vue生命周期，何时可以操作DOM
+	beforeCreate, created
+	beforeMount, mounted
+	beforeUpdate, updated
+	beforeDestroy, destroyed
+
+	mounted 可以操作DOM
+8、v-for时的key如何指定
+	我们都知道v-for渲染列表，数据量庞大，如果我们对列表进行增删改，列表需要重新渲染
+	但我们通过key给列表每一项都绑定一个唯一值，v-for根据这个唯一值去判断某个值是否修改，如果修改则会重新渲染着一条
+	提高效率，节省内存
+9、组件之间如何通信
+	父子 props $emit
+	组件之间 vuex eventBus
+10、vue的computed与watch区别
+	computed 是一个计算属性，依赖于其他数据
+	watch 更像是data的监听回调，当依赖于data的数据发生变化，执行回调
+11、父组件和子组件的执行顺序
+	父beforeCreate-> 父created -> 父beforeMounte -> 子beforeCreate ->子create ->子beforeMount ->子 mounted -> 父mounted
+
+Webpack
+1、webpack的hash配置：contenthash、chunkhash
+2、webpack配置less
+3、Webpack-dev-server的实现原理
+4、webpack的splitChunk配置
+5、babel与polyfill的配置
+
