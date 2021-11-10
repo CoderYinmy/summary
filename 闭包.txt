@@ -9,7 +9,7 @@
     3、缺点
         造成内存泄漏
         变量篡改
-
+体现
 (function main(){
     var name = 1
     var _name = 1
