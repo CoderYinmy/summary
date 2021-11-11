@@ -22,7 +22,7 @@ CSS
 	box-sizing：
 		border-box  元素宽高包括——元素宽高+内边距+border
 		content-box 元素宽高不包括——内边距和border
-		inherit  从父元素继承box-sizing属性值
+		inherit  从父元素继承box-sizing属性值	
 2、选择器种类及优先级
 	
 选择器种类——
@@ -67,6 +67,15 @@ Class、伪类、属性选择器  10
 	visibility: hidden; 隐藏后仍然会占据空间
 
 9、移动端样式适配
+	meta 标签的viewport来设置视口、缩放等
+	rem布局  rem是相对于html节点font-size来计算的  
+			将1rem设置为视口宽度的1/10，1rem = 1/10
+			将UI转成rem
+			比如：iphone6 375px，1rem  = 37.5rem
+					元素宽为75px  75/37.5 = 2rem
+			因计算繁琐我们一般会下载px2rem插件来帮助实现
+	VM和VH  将屏幕宽高分为100份 1vm = 1% 375px 1vm = 3.75vm
+
 
 10、媒体查询
 	查询屏幕尺寸，应用不同样式
@@ -110,7 +119,7 @@ Class、伪类、属性选择器  10
 14、CSS画正方形或者图片按照16:9显示
 	9/16*100%
 15、CSS浮动、清除浮动的方法
-	浮动一般是使用float后  元素脱离文档流，造成高度塌陷  
+	浮动一般是使用float后  元素脱离文档流，造成父元素高度塌陷  
 	.clearfix:before,
 	.clearfix:after {
     		display: table;
@@ -257,7 +266,8 @@ HTTP
 		非简单请求： 会发送一个预检请求，用来询问header信息里的origin请求域名是否在服务器许可名单之中，得到肯定答复后才会发起正式请求
 	3、代理
 
-js 
+JS
+
 1、基础类型和引用类型的存储，堆还是栈
 2、js的基础类型及判断
 
@@ -322,28 +332,85 @@ js
 	函数声明创建的函数在函数解析后就可以调用
 	函数表达式创建的函数在函数运行时才被赋值只能等赋值后在调用
 16、new一个构造函数的过程是什么，如果返回return一个对象得到的是什么
-17、==和===区别  
+	1. 创建一个新对象
+	2.将创建的隐式原型连接到构造函数的显示原型上
+	3.将this指向新创建的对象
+	4.判断是否返回对象，没有返回则返回this
+17、==和===区别？ 
+	== 转换类型后比较   === 类型的比较
 18、js的event loop
-19、作用域链是静态的还是动态的，有什么方法可以改变作用域链 静态的、with方法
+	事件轮询的出现是为了解决js单线程对于异步操作的一种机制
+	执行过程中同步代码立即执行，异步代码放入任务队列中，
+
+
+19、作用域链是静态的还是动态的，有什么方法可以改变作用域链？ 
+	静态的、with方法
 20、js继承和原型链
+	继承现实中的继承是子承父业，而计算机中的继承是子类可以继承父类的方法和属性，重新定义、追加属性和方法
+	继承实现的方法
+		原型链继承
+			child.prototype = new Father()
+			child.prototype.construcor = child
+			重写prototype，child.prototype没有construcor  我们需要将constructor重新指向构造函数
+		借用构造函数继承
+		组合式继承
+		原生式继承
+		寄生式继承
+		寄生式组合继承
+	
 21、Promise与async、await
 22、Symbol有什么用
+	解决属性冲突和模拟私有属性
+	保证对象属性名的唯一性，不能使用new进行操作，不能用JSON.parse 和 JSON.stringify 进行深拷贝，
 23、ES6的ES Module，与CommonJS和AMD
-24、ES最新的方法，比如链判断运算法 a & a.b & a.b.c
+	模块化开发可以提高代码复用率，方便代码管理。通常一个文件就是一个模块，都有自己的作用域
+	目前流行的js模块化规范有CommonJs 、AMD、CMD、ES6 Module
+
+24、ES最新的方法，比如链判断运算法 
+	a & a.b & a.b.c
 
 VUE
 1、keep-alive的作用
 	keep-alive用来缓存组件,避免多次加载相应的组件,减少性能消耗
 	从页面1跳转到页面2后，然后后退到页面1，只会加载缓存中之前已经渲染好的页面1，而不会再次重新加载页面1
 2、MVC与MVVM的区别
+	MVC （model-controller-view）
+		是一个单向过程，model彻底解耦，控制层和视图没有彻底解偶（点击button获取数据渲染至视图的过程）
+	MVP （model-presenter-view）
+		controller与view彻底解耦，
+		model和view通过presenter进行交流沟通
+		通过引入接口baseView，让相应视图组件activity，Fragment实现baseView，但随着业务的增加，页面会非常复杂，UI改变很多，会造成view接口庞大
+	MVVM （model-view-viewModel）
+		其实就是一个数据双向绑定的过程，model-view把数据显示到视图，viewModel通过addEventListener监听数据变化显示到视图
 3、Vue-router的实现原理
+	
 4、vue双向绑定原理
 5、SPA的优点和缺点
+	单页面应用
 6、v-show与v-if区别
+	v-if 如果条件为真 才开始创建元素和加载子组件，如果为假，元素销毁，会等到判断为真多时候重新开始创建，切换开销大；
+		有配套的v-else
+	v-show 判断里的元素会首先渲染，通过css进行简单切换，初始渲染开销大
+
 7、vue生命周期，何时可以操作DOM
+	beforeCreate, created
+	beforeMount, mounted
+	beforeUpdate, updated
+	beforeDestroy, destroyed
+
+	mounted 可以操作DOM
 8、v-for时的key如何指定
+	我们都知道v-for渲染列表，数据量庞大，如果我们对列表进行增删改，列表需要重新渲染
+	但我们通过key给列表每一项都绑定一个唯一值，v-for根据这个唯一值去判断某个值是否修改，如果修改则会重新渲染着一条
+	提高效率，节省内存
 9、组件之间如何通信
+	父子 props $emit
+	组件之间 vuex eventBus
 10、vue的computed与watch区别
+	computed 是一个计算属性，依赖于其他数据
+	watch 更像是data的监听回调，当依赖于data的数据发生变化，执行回调
+11、父组件和子组件的执行顺序
+	父beforeCreate-> 父created -> 父beforeMounte -> 子beforeCreate ->子create ->子beforeMount ->子 mounted -> 父mounted
 
 Webpack
 1、webpack的hash配置：contenthash、chunkhash
