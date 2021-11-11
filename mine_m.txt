@@ -14,7 +14,6 @@ git reset —soft 回退到某个版本，只回退了commit信息，不会恢�
 	1、Git stash apply 恢复暂存，但恢复后stash内容并不会删除，在执行git stash list 需要 执行git stash drop来删除
 	2、git stash pop恢复的同时会把stash 存储列表的内容也删除
 
-
 CSS
 1、CSS盒模型与box-sizing
 	标准盒模型：content

@@ -1,0 +1,356 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta charset="UTF-8"/>
+        <style>
+            * {
+                margin: 0 auto;
+            }
+
+            .container {
+                position: absolute;
+                width: 100%;
+                height: 200px;
+                overflow: hidden;
+            }
+
+            a {
+                width: 100%;
+                height: 200px;
+                position: relative;
+                background:rgba(127,127,127, 0.95);
+                transform: scale(0.6, 0.78) translate(0, 0) rotateX(40deg);
+                display: none;
+                border: 2px solid rgba(0, 0, 0, 0.7);
+                border-radius: 10px;
+                box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.9);
+                margin: 0;
+                z-index: -200;
+            }
+
+            a:nth-child(1) {
+                transform: scale(0.8) translate(0, 0%) rotateX(0deg);
+                z-index: 1;
+                display: block;
+                animation: scale2first 200ms 50ms linear;
+            }
+
+            @keyframes scale2first {
+                from {
+                    transform: scale(0.75, 0.78) translate(0, 0%) rotateX(10deg);
+                    z-index: -10;
+                }
+                to {
+                    transform: scale(0.8) translate(0, 0) rotateX(0deg); 
+                    z-index: 1;
+                }
+            }  
+
+            a:nth-child(2) {
+                transform: scale(0.75, 0.78) translate(0, -135%) rotateX(10deg);
+                z-index: -10;
+                display: block;
+                animation: scale2Second 300ms 60ms linear;
+            }
+
+            @keyframes scale2Second {
+                from {
+                    transform: scale(0.7, 0.78) translate(0, -135%) rotateX(20deg);
+                    z-index: -30;
+                }
+                to {
+                    transform: scale(0.75, 0.78) translate(0, -135%) rotateX(10deg);
+                    z-index: -10;
+                }
+            }
+
+            a:nth-child(3) {
+                transform: scale(0.70, 0.78) translate(0, -270%) rotateX(20deg);
+                z-index: -30;
+                display: block;
+                animation: scale2Third 400ms 70ms linear;
+            }
+
+            @keyframes scale2Third {
+                from {
+                    transform: scale(0.65, 0.78) translate(0, -270%) rotateX(30deg);
+                    z-index: -50;
+                }
+                to {
+                    transform: scale(0.7, 0.78) translate(0, -270%) rotateX(20deg); 
+                    z-index: -30;
+                }
+            }
+            
+            a:nth-child(4) {
+                transform: scale(0.65, 0.78) translate(0, -405%) rotateX(30deg);
+                z-index: -50;
+                display: block;
+                animation: scale2Fourth 500ms 80ms linear;
+            }
+
+            @keyframes scale2Fourth {
+                from {
+                    transform: scale(0.60, 0.78) translate(0, -405%) rotateX(40deg);
+                    z-index: -70;
+                }
+                to {
+                    transform: scale(0.65, 0.78) translate(0, -405%) rotateX(30deg);
+                    z-index: -50;
+                }
+            }
+
+            a:nth-child(5) {
+                transform: scale(0.6, 0.76) translate(0, -540%) rotateX(40deg);
+                z-index: -70;
+                display: block;
+                animation: scale2Fifth 600ms 90ms linear;
+            }
+
+            @keyframes scale2Fifth {
+                from {
+                    transform: scale(0.5, 0.7) translate(0, -640%) rotateX(50deg);
+                    z-index: -200;
+                    display: none;
+                    opacity: 0.1;
+                }
+                to {
+                    transform: scale(0.6, 0.76) translate(0, -540%) rotateX(40deg);
+                    z-index: -70;
+                    opacity: 0.9;
+                }
+            }
+
+            a:last-child {
+                animation: fade-in 100ms linear;
+            }
+
+            @keyframes fadeout-left {
+                0% {
+                    transform: scale(0.8) rotate(0deg);
+                    opacity: 0.95;
+                }
+                25% {
+                    transform: scale(0.9) rotate(-10deg);
+                    opacity: 0.9;
+                }
+                50% {
+                    transform-origin: bottom left;
+                    transform: scale(1.0) rotate(-25deg);
+                    opacity: 0.7;
+                }
+                75% {
+                    transform-origin: bottom left;
+                    transform: scale(1.1) rotate(-50deg);
+                    opacity: 0.5;
+                }
+                99% {
+                    transform-origin: bottom left;
+                    transform: scale(1.2) rotate(-100deg);
+                    opacity: 0.3;
+                }
+                100% {
+                    opacity: 0;
+                    display: none;
+                }
+            }
+
+            @keyframes fadeout-right {
+                0% {
+                    transform: scale(0.8) rotate(0deg);
+                    opacity: 0.95;
+                }
+                25% {
+                    transform: scale(0.9) rotate(10deg);
+                    opacity: 0.9;
+                }
+                50% {
+                    transform-origin: bottom right;
+                    transform: scale(1.0) rotate(25deg);
+                    opacity: 0.7;
+                }
+                75% {
+                    transform-origin: bottom right;
+                    transform: scale(1.1) rotate(50deg);
+                    opacity: 0.5;
+                }
+                99% {
+                    transform-origin: bottom right;
+                    transform: scale(1.2) rotate(100deg);
+                    opacity: 0.3;
+                }
+                100% {
+                    opacity: 0;
+                    display: none;
+                }
+            }
+
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                    display: none;
+                }
+                1% {
+                    display: block;
+                    transform-origin: bottom right;
+                    transform: scale(0.1) rotate(100deg);
+                    opacity: 0.1;
+                }
+                25% {
+                    display: block;
+                    transform-origin: bottom right;
+                    transform: scale(0.3) rotate(75deg);
+                    opacity: 0.3;
+                }
+                50% {
+                    display: block;
+                    transform-origin: bottom right;
+                    transform: scale(0.5) rotate(50deg);
+                    opacity: 0.5;
+                }
+                75% {
+                    display: block;
+                    transform-origin: bottom right;
+                    transform: scale(0.6) rotate(25deg);
+                    opacity: 0.6;
+                }
+                100% {
+                    display: block;
+                    transform-origin: bottom right;
+                    transform: scale(0.7) rotate(0deg);
+                    opacity: 0.7;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container" class="container">
+            <a>1</a>
+            <a>2</a>
+            <a>3</a>
+            <a>4</a>
+            <a>5</a>
+            <a>6</a>
+            <a>7</a>
+            <a>8</a>
+        </div>
+    </body>
+    <script>
+        const calc = {
+            screenX_start: 0,
+            screenX_end: 0,
+            autoplay: true,
+            count: function() { 
+                // 没有位移
+                if (this.screenX_start == 0 || this.screenX_end == 0) {
+                    return 0;   
+                }
+                // 发生最终位移
+                return this.screenX_end - this.screenX_start;
+            },
+            reset: function() {
+                this.screenX_end = 0;
+                this.screenX_start = 0;
+                this.autoplay = false;
+            },
+            auto: function() {
+                if (this.autoplay) {
+                    autoTouchEvent(document.querySelector('a'));
+                } else {
+                    this.autoplay = true;
+                }
+            }
+        }
+
+        function autoTouchEvent (el) {
+            let touchStart = new Touch({
+                identifier: 1000001,
+                target: el,
+                screenX: 100.0,
+            });
+
+            let touchMove = new Touch({
+                identifier: 1000002, 
+                target: el,
+                screenX: 50.0,
+            });
+
+            let eventTouchStart = new TouchEvent('touchstart', {
+                changedTouches: [touchStart],
+                touches: [touchStart],
+            });
+            el.dispatchEvent(eventTouchStart);
+
+            // 触摸滑动事件
+            let eventTouchMove = new TouchEvent('touchmove', {
+                changedTouches: [touchStart, touchMove],
+                touches: [touchStart, touchMove]
+            });
+            el.dispatchEvent(eventTouchMove);
+
+            // 触碰结束事件
+            let eventTouchEnd = new TouchEvent('touchend');
+            el.dispatchEvent(eventTouchEnd);
+        }
+
+        window.onload = function() {
+
+            document.querySelectorAll('a').forEach(function(element, currentIndex, listObj) {
+
+                element.addEventListener('touchstart', function(e) {
+                    calc.screenX_start = e.touches[0].screenX;
+                    //console.info('touchstart', calc.screenX_start);
+                    calc.autoplay = false;
+                });
+
+                element.addEventListener('touchmove', function(e) {
+                    calc.screenX_end = e.touches[e.touches.length - 1].screenX;
+                    // console.info('touchmove', calc.screenX_end); 
+                    calc.autoplay = false;
+                });
+
+                element.addEventListener('touchend', function(e) {
+                    // console.info('touchend');
+                    calc.autoplay = false;
+                    let temp = this;
+                    let move = calc.count();
+
+                    if (move != 0) {
+                        // 判断左边界
+                        if (move < 0) {
+                            temp.style.animation = 'fadeout-left 500ms 50ms linear';
+                        }
+
+                        if (move > 0) {
+                            temp.style.animation = 'fadeout-right 500ms 50ms linear';
+                        }
+
+                        temp.style.animationFillMode = 'forwards';
+
+                        // 延迟追加到后面
+                        setTimeout(() => {
+
+                            temp.style.animation = '';
+                            temp.style.animationFillMode = '';
+
+                            document.querySelector('#container').append(temp);
+
+                        }, 600);
+                    } else {
+                        // 点击跳转逻辑
+                        // console.info("click");
+                        // location.href = "";
+                    }
+                    
+                    calc.reset();
+                });
+            });
+
+            // 定时自动轮播
+            setInterval(() => {
+                calc.auto();
+            }, 3000);
+        }
+    </script>
+</html>
